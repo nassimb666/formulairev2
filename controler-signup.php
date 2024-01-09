@@ -36,48 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Les mots de passe ne correspondent pas.";
     }
 
-
     if (empty($errors)) {
         $showForm = false;
-
-    }
-    <?php
-session_start();
-
-$passwordError = ""; 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $date = $_POST['date'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['password2'];
-    $conditionsUtilisation = isset($_POST['conditions_utilisation']);
-
-   
-    if (!empty($nom) && !empty($prenom) && !empty($date) && !empty($password) && !empty($confirmPassword) && $conditionsUtilisation) {
-        
-        if ($password === $confirmPassword) {
-            echo "Les mots de passe sont identiques.";
-            
-            $_SESSION['form_submitted'] = true;
-        } else {
-            $passwordError = "Les mots de passe ne sont pas identiques. Veuillez réessayer.";
-        }
-    } else {
-        
-        echo "Veuillez remplir tous les champs du formulaire et accepter les conditions d'utilisation.";
     }
 }
 
-if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
-    echo "Le formulaire a été envoyé avec succès.";
-    unset($_SESSION['form_submitted']); 
-}
-?>
-}
 
 include("view-signup.php");
 ?>
