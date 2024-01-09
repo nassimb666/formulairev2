@@ -16,7 +16,6 @@
 
         <label for="nom">Nom:</label>
         <input type="text" name="nom" id="nom" required>
-        <!-- Ajoutez l'attribut "required" pour rendre le champ obligatoire -->
         <label for="prenom">Prénom:</label>
         <input type="text" name="prenom" id="prenom" required>
         <label for="date">Date de naissance:</label>
