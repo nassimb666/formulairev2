@@ -30,9 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($motDePasse)) {
         $errors[] = "Le champ 'Mot de passe' est obligatoire.";
-    } elseif (strlen($motDePasse) < 8) {
+    } 
+    elseif (strlen($motDePasse) < 8) {
         $errors[] = "Le mot de passe doit contenir au moins 8 caractères.";
-    } elseif ($motDePasse !== $confirmationMotDePasse) {
+    } 
+    elseif ($motDePasse !== $confirmationMotDePasse) {
         $errors[] = "Les mots de passe ne correspondent pas.";
     }
 
