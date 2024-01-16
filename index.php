@@ -1,5 +1,5 @@
 <?php
-header("Location: controler-signup.php");
+header("Location: controllers/controler-signup.php");
 exit();
 
 ?>

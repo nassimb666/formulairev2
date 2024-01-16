@@ -2,7 +2,7 @@
 session_start();
 
 $passwordError = ""; 
-
+     
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
@@ -44,18 +44,28 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
     <title>Inscription</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/style/style.css">
 </head>
-<?php include './head.php'; ?>
-<body>
-    
 
-    <form method="post" action="votre_script_php.php">
+<body>
+<?php include '../views/header.php'; ?>
+
+    <form method="post" action="" novalidate>
 
         <label for="nom">Nom:</label>
         <input type="text" name="nom" id="nom" required>
         <label for="prenom">Prénom:</label>
         <input type="text" name="prenom" id="prenom" required>
+        <label for="pseudo">Pseudo:</label>
+        <input type="text" name="pseudo" id="pseudo" required>
+        <label for="mail">mail:</label>
+        <input type="text" name="mail" id="mail" required>
+        <label for="entreprise">Entreprise:</label>
+        <select name="entreprise" id="entreprise"required>
+            <option value="">--veuillez choisir un champ--</option>
+            <option value="1">entreprise1</option>
+            <option value="2">entreprise2</option>
+        </select>
         <label for="date">Date de naissance:</label>
         <input type="date" name="date" required>
         <label for="password">Mot de passe:</label>
@@ -75,7 +85,7 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
         <input type="submit" value="S'inscrire" class="submit-button">
     </form>
 
-    <?php include './footer.php'; ?>
+    <?php include '../views/footer.php'; ?>
     <script src="./script.js"></script>
 </body>
 

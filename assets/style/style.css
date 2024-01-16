@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    flex: 1; /* Utilise tout l'espace disponible en hauteur */
+    flex: 1;
     max-width: 600px;
     margin: 50px auto;
     background-color: #fff;
@@ -77,8 +77,6 @@ input {
     color: white;
     text-align: center;
     padding: 20px;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     
 }
@@ -126,4 +124,10 @@ nav a {
 
 nav a:hover {
     border-bottom: 2px solid black;
+}
+select {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
