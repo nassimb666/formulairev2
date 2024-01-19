@@ -7,10 +7,10 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-   
+    align-items: center;
 }
 
-.container {
+.form_co {
     flex: 1;
     max-width: 600px;
     margin: 50px auto;
@@ -38,16 +38,6 @@ input {
     border-radius: 4px;
 }
 
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.checkbox-label input {
-    margin-right: 8px;
-}
-
 .error-message {
     color: red;
     margin-bottom: 16px;
@@ -72,6 +62,34 @@ input {
     background-color: #0056b3;
 }
 
+#setbutton {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.signup {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.signup:hover {
+    background-color: #27ae60;
+}
+
+span {
+    color: #e74c3c;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+p {
+    color: #e74c3c;
+    margin-top: 10px;
+}
 .footer {
     background-color: #333;
     color: white;
@@ -103,6 +121,7 @@ nav {
     display: flex;
     justify-content: center;
     margin-bottom: 20px; 
+    width: 100%;
 }
 
 nav ul {
@@ -124,15 +143,4 @@ nav a {
 
 nav a:hover {
     border-bottom: 2px solid black;
-}
-select {
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-h1 {
-    text-align: center;
-    color: #333;
 }

@@ -14,17 +14,24 @@
 
 <body>
     <h1>Veuillez vous identifier</h1>
-
+    <div class="form_co">
     <form action="" method="POST" novalidate>
-        <label for="mail">Identifiant:</label>
-        <input type="text" name="mail" id="mail" placeholder="exemple@mail.fr" required>
+            <label for="mail">Identifiant:</label>
+            <input type="text" name="mail" id="mail" placeholder="exemple@mail.fr" required>
 
-        <label for="password">Mot de passe:</label>
-        <input type="password" name="password" id="password" required><span><?= $errors['mot_de_passe'] ?? '' ?></span><br>
-        <p><?= $errors['connexion'] ?? '' ?></p>
+            <label for="password">Mot de passe:</label>
+            <input type="password" name="password" id="password" required><span><?= $errors['mot_de_passe'] ?? '' ?></span><br>
+            <p><?= $errors['connexion'] ?? '' ?></p>
 
-        <input type="submit" value="Se connecter">
-    </form>
+            <input type="submit" value="Se connecter">
+
+        </form>
+    </div>
+    
+    <div id="setbutton">
+        <p>Pas encore de compte ? Inscrivez vous:</p>
+        <a href="../controllers/controler-signup.php"><button class='signup'>s'inscrire</button></a>
+    </div>
 </body>
 
 </html>
