@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $passwordError = ""; 
      
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -69,7 +68,7 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
         <label for="date">Date de naissance:</label>
         <input type="date" name="date" required>
         <label for="password">Mot de passe:</label>
-        <input type="password" name="password" id="password" required>
+        <input type="password" name="password" id="password" require>
         <label for="password2">Confirmer Mot de passe:</label>
         <input type="password" name="password2" id="password2" required>
 
@@ -86,7 +85,8 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
     </form>
 
     <?php include '../views/footer.php'; ?>
-    <script src="./script.js"></script>
 </body>
 
 </html>
+
+

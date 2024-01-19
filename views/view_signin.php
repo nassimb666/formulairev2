@@ -1,40 +1,5 @@
 <?php
-session_start();
-
-require_once "../config.php";
-require_once "../models/utilisateur.php";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = isset($_POST["mail"]) ? trim($_POST["mail"]) : null;
-    $password = isset($_POST["password"]) ? trim($_POST["password"]) : null;
-
-    if (empty($email) || empty($password)) {
-        echo "Veuillez remplir tous les champs du formulaire.";
-        // exit();
-    } else {
-        try {
-            $db = Database::getInstance();
-            $query = $db->getConnection()->prepare("SELECT * FROM `userprofil` WHERE `user_email` = :email LIMIT 1");
-            $query->bindValue(':email', $email, PDO::PARAM_STR);
-            $query->execute();
-            $user = $query->fetch(PDO::FETCH_ASSOC);
-
-            if ($user) {
-                if (password_verify($password, $user['user_password'])) {
-                    $_SESSION['user'] = $user;
-                    header("Location: dashboard.php");
-                    exit();
-                } else {
-                    echo "Mot de passe incorrect.";
-                }
-            } else {
-                echo "Aucun compte trouvé avec cette adresse e-mail.";
-            }
-        } catch (PDOException $e) {
-            echo 'Erreur : ' . $e->getMessage();
-        }
-    }
-}
+    require_once"../controllers/controler_signin.php";
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connectez-vous</title>
+    <link rel="stylesheet" href="../assets/style/style.css">
 </head>
 
 <body>
@@ -54,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="text" name="mail" id="mail" placeholder="exemple@mail.fr" required>
 
         <label for="password">Mot de passe:</label>
-        <input type="password" name="password" id="password" required>
+        <input type="password" name="password" id="password" required><span><?= $errors['mot_de_passe'] ?? '' ?></span><br>
+        <p><?= $errors['connexion'] ?? '' ?></p>
 
         <input type="submit" value="Se connecter">
     </form>

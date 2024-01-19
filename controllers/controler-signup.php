@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Le champ 'Courriel' est obligatoire et doit être au format d'une adresse email valide.";
     }
 
-    // Validation des autres champs
+    // Validation des champs du formulaire
     $pseudo = isset($_POST["pseudo"]) ? trim($_POST["pseudo"]) : null;
     $birthdate = isset($_POST["date"]) ? trim($_POST["date"]) : null;
     $password = isset($_POST["password"]) ? trim($_POST["password"]) : null;
@@ -21,8 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_validate = 1;
     $nom = isset($_POST["nom"]) ? trim($_POST["nom"]) : null;
     $prenom = isset($_POST["prenom"]) ? trim($_POST["prenom"]) : null;
-
-    // Validation supplémentaire pour les autres champs (ajoutez selon vos besoins)
 
     if (empty($errors)) {
         // Handle successful registration
@@ -38,4 +36,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 include("../views/view-signup.php");
-?>
+
