@@ -50,7 +50,14 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
 
 
 <body>
-    <?php include '../views/header.php'; ?>
+    <!-- <?php include 'views/header_signup.php'; ?> -->
+
+    <div class="navbar">
+        <a href="../controllers/controler_signin.php">Accueil</a>
+        <a href="#">Services</a>
+        <a href="#">À propos</a>
+        <a href="#">Contact</a>
+    </div>
 
     <div class="form_signup">
         <form method="post" action="" novalidate>
@@ -89,6 +96,7 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
 
             <input type="submit" value="S'inscrire" class="submit-button">
         </form>
+        <a href="../controllers/controler_signin.php"><button class="return">Retour</button></a>
     </div>
 
 

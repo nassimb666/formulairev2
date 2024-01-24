@@ -1,4 +1,5 @@
 <?php
+
 class Database
 {
     private static $instance;
@@ -24,6 +25,11 @@ class Database
     {
         return $this->connection;
     }
+
+    public function execute($query, $params = array())
+    {
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute($params);
+    }
 }
-?>
 
