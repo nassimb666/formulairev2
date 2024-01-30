@@ -22,23 +22,26 @@ require_once "../controllers/controler_history.php";
 
 
     <?php foreach ($ride as $element) { ?>
-        <div class="historique">
-            <p>
-                <?= $element['ride_date'] ?>
-            </p>
-            
-            <p>
-                <?= $element['ride_distance'] ?> Km
-            </p>
-            <p>
-                <?= $element['transport_type'] ?>
-            </p>
-            <button>delete</button>
-        </div>
+    <div class="historique">
+
+        <p><?= $element['ride_date'] ?></p>
+
+        <p><?= $element['ride_distance'] ?> Km</p>
+
+        <p><?= $element['transport_type'] ?></p>
 
 
+        <form action="" method="post" onsubmit="return confirm('Voulez-vous supprimer le trajet? (La suppression sera effectuée même en cliquant sur Annuler)')">
+            <input type="hidden" name="ride_id" value="<?= $element['ride_id'] ?>">
+            <input type="submit" name="delete" value="delete">
+        </form>
+    </div>
+<?php } ?>
 
-    <?php } ?>
+
+    <div id="add">
+        <a href="../controllers/controler_trajet.php"><button>Enregistrer un nouveau trajet</button></a>
+    </div>
 
     <a href="../controllers/controler_home.php"><button>retour</button>
 

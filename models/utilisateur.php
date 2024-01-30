@@ -76,4 +76,120 @@ class User
     }
 
     
+
+    public static function updateName($user_id, $newName) {
+        try {
+            self::initDatabase();
+
+            $sql = "UPDATE userprofil SET user_name = :newName WHERE user_id = :user_id";
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue(':newName', $newName, PDO::PARAM_STR);
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            throw new Exception('Erreur lors de la mise à jour du nom : ' . $e->getMessage());
+        }
+    }
+
+    public static function updateFirstname($user_id, $newFirstname) {
+        try {
+            self::initDatabase();
+
+            $sql = "UPDATE userprofil SET user_firstname = :newFirstname WHERE user_id = :user_id";
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue(':newFirstname', $newFirstname, PDO::PARAM_STR);
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            throw new Exception('Erreur lors de la mise à jour du prénom : ' . $e->getMessage());
+        }
+    }
+
+    public static function updatePseudo($user_id, $newPseudo) {
+        try {
+            self::initDatabase();
+
+            $sql = "UPDATE userprofil SET user_pseudo = :newPseudo WHERE user_id = :user_id";
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue(':newPseudo', $newPseudo, PDO::PARAM_STR);
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            throw new Exception('Erreur lors de la mise à jour du pseudo : ' . $e->getMessage());
+        }
+    }
+
+    public static function updateDescription($user_id, $newDescription) {
+        try {
+            self::initDatabase();
+
+            $sql = "UPDATE userprofil SET user_describ = :newDescription WHERE user_id = :user_id";
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue(':newDescription', $newDescription, PDO::PARAM_STR);
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            throw new Exception('Erreur lors de la mise à jour de la description : ' . $e->getMessage());
+        }
+    }
+
+    public static function updateMail($user_id, $newMail) {
+        try {
+            self::initDatabase();
+
+            $sql = "UPDATE userprofil SET user_email = :newMail WHERE user_id = :user_id";
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue(':newMail', $newMail, PDO::PARAM_STR);
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            throw new Exception('Erreur lors de la mise à jour du mail : ' . $e->getMessage());
+        }
+    }
+
+    public static function updateBirthdate($user_id, $newBirthdate) {
+        try {
+            self::initDatabase();
+            
+            $sql = "UPDATE userprofil SET user_dateofbirth = :newBirthdate WHERE user_id = :user_id";
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue(':newBirthdate', $newBirthdate, PDO::PARAM_STR); // Assurez-vous que le champ dans la base de données est de type date ou datetime
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            
+        }
+    }
+
+    public static function updatephoto($user_id, $newphoto){
+        try {
+            self::initDatabase();
+
+            $sql = "UPDATE userprofil SET user_photo = :new_photo WHERE user_id = :user_id";
+
+            $query = self::$db->prepare($sql);
+
+            $query->bindValue("new_photo", $newphoto, PDO::PARAM_STR);
+            $query->bindValue("user_id", $user_id, PDO::PARAM_INT);
+
+            $query->execute();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    } 
 }

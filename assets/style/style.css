@@ -201,22 +201,22 @@ a:hover {
   }
   
   .back-button {
-    display: inline-block; /* Affichage en ligne pour s'ajuster au contenu */
-    padding: 10px 20px; /* Espacement interne du bouton */
-    font-size: 16px; /* Taille de la police */
-    text-align: center; /* Centrer le texte */
-    text-decoration: none; /* Supprimer la soulignement par défaut */
-    background-color: #4CAF50; /* Couleur de fond du bouton */
-    color: white; /* Couleur du texte du bouton */
-    border: 1px solid #4CAF50; /* Bordure du bouton */
-    border-radius: 5px; /* Coins arrondis */
-    cursor: pointer; /* Curseur pointer au survol */
+    display: inline-block; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    text-align: center; 
+    text-decoration: none; 
+    background-color: #4CAF50; 
+    color: white; 
+    border: 1px solid #4CAF50;
+    border-radius: 5px; 
+    cursor: pointer; 
   }
   
   /* Style au survol du bouton */
   .back-button:hover {
-    background-color: #45a049; /* Couleur de fond au survol */
-    border-color: #45a049; /* Bordure au survol */
+    background-color: #45a049; 
+    border-color: #45a049; 
   }
 
   .historique {
@@ -238,4 +238,38 @@ a:hover {
     color: #007bff; 
   }
   
+  h2 {
+    color: #333;
+}
+
+/* Style de la section "info" */
+.info {
+    margin-top: 20px;
+}
+
+/* Style des informations */
+.info div {
+    margin-bottom: 10px;
+}
+
+/* Style des boutons "Modifier" */
+.edit {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+}
+
+.P_pics{
+    width: 40%;
+    margin-left: 15rem;
+}
+
+.clearfix {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
   

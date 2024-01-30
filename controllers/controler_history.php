@@ -9,6 +9,21 @@
 
     $ride = ride::getHistory($_SESSION['user']['user_id']);
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['delete'])) {
+            if ($_POST['delete'] === 'delete') {
+                // Supprimer la ride
+                ride::delete($_POST["ride_id"]);
+                header("Location: controler_history.php");
+            } else {
+                // Annuler l'opération de suppression
+                header("Location: controler_history.php");
+            }
+        }
+    }
+
+    
+    
     
 
     // var_dump($ride);
