@@ -9,7 +9,7 @@ require_once "../controllers/controler_history.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style2.css">
     <title>Historique</title>
 </head>
 
@@ -24,7 +24,7 @@ require_once "../controllers/controler_history.php";
     <?php foreach ($ride as $element) { ?>
     <div class="historique">
 
-        <p><?= $element['ride_date'] ?></p>
+        <p><?= $element['date_FR'] ?></p>
 
         <p><?= $element['ride_distance'] ?> Km</p>
 

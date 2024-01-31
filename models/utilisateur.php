@@ -62,7 +62,7 @@ class User
         try {
             self::initDatabase();
 
-            $sql = "SELECT * FROM `userprofil` WHERE `user_email` = :mail";
+            $sql = "SELECT *, DATE_FORMAT(`user_dateofbirth`,'%d/%m/%Y') AS date_FR FROM `userprofil` WHERE `user_email` = :mail";
 
             $query = self::$db->prepare($sql);
             $query->bindValue(':mail', $email, PDO::PARAM_STR);

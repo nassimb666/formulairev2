@@ -47,7 +47,7 @@ class ride
         try {
             self::initDatabase();
 
-            $sql = "SELECT ride.*, transport.transport_type
+            $sql = "SELECT *, DATE_FORMAT(`ride_date`, '%d/%m/%Y') AS date_FR
             FROM ride
             NATURAL JOIN transport
             WHERE ride.user_id = :user_id

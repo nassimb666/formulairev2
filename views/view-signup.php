@@ -1,5 +1,11 @@
 <?php
+
+
+
 session_start();
+
+
+require_once("../models/entreprise.php");
 $passwordError = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -44,7 +50,7 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         crossorigin="anonymous" />
     <title>Inscription</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style2.css">
 </head>
 
 
@@ -63,11 +69,17 @@ if (isset($_SESSION['form_submitted']) && $_SESSION['form_submitted']) {
             <input type="text" name="pseudo" id="pseudo" required>
             <label for="mail">mail:</label>
             <input type="text" name="mail" id="mail" required>
-            <label for="entreprise">Entreprise:</label>
-            <select name="entreprise" id="entreprise" required>
-                <option value="">--veuillez choisir un champ--</option>
-                <option value="1">entreprise1</option>
-                <option value="2">entreprise2</option>
+            <label for="entreprise">Entreprise :</label><br>
+            <select type="text" id="enterprise" name="enterprise"
+                value="<?= isset($_POST['enterprise']) ? htmlspecialchars($_POST['enterprise']) : '' ?>">
+                <option value="">--Quelle est votre entreprise ?</option>
+                <?php
+                foreach (Entreprise::getEntreprise() as $entreprise) { ?>
+                    <option value="<?= $entreprise["enterprise_id"] ?>">
+                        <?= $entreprise["enterprise_Name"] ?>
+                    </option>
+                <?php } ?>
+
             </select>
             <label for="date">Date de naissance:</label>
             <input type="date" name="date" required>

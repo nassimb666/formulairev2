@@ -14,12 +14,12 @@ $firstname = $_SESSION['user']['user_firstname'];
 $pseudo = $_SESSION['user']['user_pseudo'];
 $description = $_SESSION['user']['user_describ'];
 $mail = $_SESSION['user']['user_email'];
-$birthdate = $_SESSION['user']['user_dateofbirth'];
+$birthdate = $_SESSION['user']['date_FR'];
 $photo = $_SESSION['user']['user_photo'];
  
-var_dump($_FILES);
-var_dump($_POST);
-var_dump($_SESSION);
+// var_dump($_FILES);
+// var_dump($_POST);
+// var_dump($_SESSION);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Assurez-vous que le bouton "Modifier" est défini dans la requête POST
@@ -34,27 +34,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['edit_firstname'])) {
         // Récupérer la nouvelle valeur depuis le formulaire 
         $newFirstname = $_POST['new_firstname'];
-        $_SESSION['user']['user_firstname'] = $newFirstname;
-
         // Mettre à jour le prénom dans la base de données
         user::updateFirstname($user_id, $newFirstname);
-        $_SESSION['user']['user_firstname'] = $newName;
+        $_SESSION['user']['user_firstname'] = $newFirstname;
     } 
     if (isset($_POST['edit_pseudo'])) {
         // Récupérer la nouvelle valeur depuis le formulaire 
         $newPseudo = $_POST['new_pseudo'];
-        $_SESSION['user']['user_pseudo'] = $newPseudo;
-
         // Mettre à jour le pseudo dans la base de données
         user::updatePseudo($user_id, $newPseudo);
+        $_SESSION['user']['user_pseudo'] = $newPseudo;
+
+        
     } 
     if (isset($_POST['edit_description'])) {
         // Récupérer la nouvelle valeur depuis le formulaire 
         $newDescription = $_POST['new_description'];
-        $_SESSION['user']['user_describ'] = $newDescription;
-
+        
         // Mettre à jour la description dans la base de données
         user::updateDescription($user_id, $newDescription);
+        $_SESSION['user']['user_describ'] = $newDescription;
+
     } 
     if (isset($_POST['edit_mail'])) {
         // Récupérer la nouvelle valeur depuis le formulaire 

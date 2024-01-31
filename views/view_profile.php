@@ -3,7 +3,7 @@ require_once "../controllers/controler_profile.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@ require_once "../controllers/controler_profile.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         crossorigin="anonymous" />
     <title>Mon Profil</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style2.css">
 </head>
 
 <body>
@@ -22,9 +22,11 @@ require_once "../controllers/controler_profile.php";
     <h1>Votre Profil
         <?php echo $pseudo; ?>!
     </h1>
+
     <h2>Vos Informations:</h2>
 
-    <div class="clearfix">
+
+    <div class=" clearfix">
         <div class="info">
             Nom de famille:
             <br>
@@ -88,6 +90,7 @@ require_once "../controllers/controler_profile.php";
             <button class="edit" onclick="toggleEdit('form_mail', 'display_mail')">Modifier</button>
             <br>
 
+
             date de naissance:
             <br>
             <span id="display_birthdate">
@@ -102,25 +105,24 @@ require_once "../controllers/controler_profile.php";
             <button class="edit" onclick="toggleEdit('form_birthdate', 'display_birthdate')">Modifier</button>
             <br>
 
+
+        </div>
+        <div class='ppics'>
             <p>photo de Profil:</p>
-            <img src="../assets/img/<?= $photo?>" alt="">
-            <form action="../controllers/controler_profile.php" method="post" style="display: none;"enctype="multipart/form-data"
-                id="form_photo">
+            <img src="../assets/img/<?= $photo ?>" alt="" class="profile-pic">
+            <form action="../controllers/controler_profile.php" method="post" style="display: none;"
+                enctype="multipart/form-data" id="form_photo">
                 <input type="file" name="new_photo">
 
                 <button class="edit" name="edit_photo">Enregistrer</button>
             </form>
             <button class="edit" onclick="toggleEdit('form_photo', 'display_photo')">Modifier</button>
             <br>
-            
-
-
         </div>
-
-
-
-
     </div>
+
+
+
 
     <a href="../controllers/controler_home.php"><button class="back-button">Retour</button></a>
 
@@ -128,20 +130,29 @@ require_once "../controllers/controler_profile.php";
     include 'footer.php';
     ?>
 
+
     <script>
         function toggleEdit(formId, displayId) {
             var form = document.getElementById(formId);
             var display = document.getElementById(displayId);
+            var editButton = document.querySelector('[onclick="toggleEdit(\'' + formId + '\', \'' + displayId + '\')"]');
 
-            if (form.style.display === "none") {
-                form.style.display = "block";
-                display.style.display = "none";
+            if (form && display && editButton) {
+                if (form.style.display === "none") {
+                    form.style.display = "block";
+                    display.style.display = "none";
+                    editButton.style.display = "none"; // Masquer le bouton "Modifier"
+                } else {
+                    form.style.display = "none";
+                    display.style.display = "inline";
+                    editButton.style.display = "inline"; // Afficher à nouveau le bouton "Modifier"
+                }
             } else {
-                form.style.display = "none";
-                display.style.display = "inline";
+                console.error("Les éléments avec les ID spécifiés n'ont pas été trouvés.");
             }
         }
     </script>
+
 </body>
 
 </html>
