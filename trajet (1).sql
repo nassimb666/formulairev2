@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 19 jan. 2024 à 10:36
+-- Généré le : jeu. 01 fév. 2024 à 14:48
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `trajet`
 --
-CREATE DATABASE IF NOT EXISTS `trajet` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `trajet`;
 
 -- --------------------------------------------------------
 
@@ -29,13 +27,11 @@ USE `trajet`;
 -- Structure de la table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `admin_id` int NOT NULL,
   `admin_email` varchar(50) NOT NULL,
-  `admin_password` varchar(255) NOT NULL,
-  PRIMARY KEY (`admin_id`),
-  UNIQUE KEY `admin_email` (`admin_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `admin_password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `admin`
@@ -50,8 +46,8 @@ INSERT INTO `admin` (`admin_id`, `admin_email`, `admin_password`) VALUES
 -- Structure de la table `enterprise`
 --
 
-CREATE TABLE IF NOT EXISTS `enterprise` (
-  `enterprise_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `enterprise` (
+  `enterprise_id` int NOT NULL,
   `enterprise_name` varchar(50) NOT NULL,
   `enterprise_email` varchar(50) NOT NULL,
   `enterprise_siret` varchar(50) NOT NULL,
@@ -59,10 +55,8 @@ CREATE TABLE IF NOT EXISTS `enterprise` (
   `enterprise_password` varchar(255) NOT NULL,
   `enterprise_zipcode` int NOT NULL,
   `enterprise_city` varchar(25) NOT NULL,
-  `enterprise_photo` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`enterprise_id`),
-  UNIQUE KEY `enterprise_siret` (`enterprise_siret`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `enterprise_photo` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `enterprise`
@@ -70,7 +64,8 @@ CREATE TABLE IF NOT EXISTS `enterprise` (
 
 INSERT INTO `enterprise` (`enterprise_id`, `enterprise_name`, `enterprise_email`, `enterprise_siret`, `enterprise_adress`, `enterprise_password`, `enterprise_zipcode`, `enterprise_city`, `enterprise_photo`) VALUES
 (1, 'France Gazouz', 'FranceGazouz@gmail.com', '54DE65Z5D2DF', '28 Rue De La Mort', 'Geleklek123', 76000, 'Rouen', NULL),
-(2, 'Nouvelle Entreprise SAS', 'contact@nouvelleentreprise.com', '12345678901234', '15 Rue du Commerce', 'MotDePasse123', 75001, 'Paris', NULL);
+(2, 'AmineCorp', 'contact@nouvelleentreprise.com', '12345678901234', '15 Rue du Commerce', 'MotDePasse123', 75001, 'Paris', NULL),
+(3, 'NassCorp', 'NassCorp@mail.fr', ' 12345678901234.', '10 rue chez moi', 'password', 76000, 'Rouen', NULL);
 
 -- --------------------------------------------------------
 
@@ -78,17 +73,15 @@ INSERT INTO `enterprise` (`enterprise_id`, `enterprise_name`, `enterprise_email`
 -- Structure de la table `events`
 --
 
-CREATE TABLE IF NOT EXISTS `events` (
-  `events_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `events` (
+  `events_id` int NOT NULL,
   `events_startdate` date NOT NULL,
   `events_challengedescrib` varchar(300) NOT NULL,
   `events_photo` varchar(50) DEFAULT NULL,
   `events_enddate` date NOT NULL,
   `events_challengename` varchar(50) NOT NULL,
-  `enterprise_id` int NOT NULL,
-  PRIMARY KEY (`events_id`),
-  KEY `enterprise_id` (`enterprise_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `enterprise_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `events`
@@ -104,50 +97,50 @@ INSERT INTO `events` (`events_id`, `events_startdate`, `events_challengedescrib`
 -- Structure de la table `ride`
 --
 
-CREATE TABLE IF NOT EXISTS `ride` (
-  `ride_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ride` (
+  `ride_id` int NOT NULL,
   `ride_date` date NOT NULL,
-  `ride_distance` decimal(3,2) NOT NULL,
+  `ride_distance` float NOT NULL,
   `ride_photo` varchar(50) DEFAULT NULL,
   `user_id` int NOT NULL,
-  `transport_id` int NOT NULL,
-  PRIMARY KEY (`ride_id`),
-  KEY `user_id` (`user_id`),
-  KEY `transport_id` (`transport_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `transport_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `ride`
 --
 
 INSERT INTO `ride` (`ride_id`, `ride_date`, `ride_distance`, `ride_photo`, `user_id`, `transport_id`) VALUES
-(1, '2024-02-01', 2.50, 'parc_epicerie.jpg', 1, 1),
-(2, '2024-02-02', 3.80, 'bureau_parc.jpg', 2, 2),
-(3, '2024-02-03', 4.20, 'gym_magasin.jpg', 3, 1),
-(4, '2024-02-01', 2.50, 'parc_epicerie.jpg', 1, 1),
-(5, '2024-02-02', 3.80, 'bureau_parc.jpg', 2, 2),
-(6, '2024-02-03', 4.20, 'gym_magasin.jpg', 3, 1),
-(7, '2024-02-01', 2.50, 'parc_epicerie.jpg', 1, 1),
-(8, '2024-02-02', 3.80, 'bureau_parc.jpg', 2, 2),
-(9, '2024-02-03', 4.20, 'gym_magasin.jpg', 3, 1),
-(64, '2024-02-04', 7.30, 'maison_travail.jpg', 1, 3),
-(65, '2024-02-05', 1.20, 'travail_restaurant.jpg', 1, 1),
-(66, '2024-02-06', 5.60, 'maison_bureau.jpg', 2, 2),
-(67, '2024-02-07', 2.10, 'bureau_parc.jpg', 2, 2),
-(68, '2024-02-08', 3.90, 'maison_bureau.jpg', 3, 3),
-(69, '2024-02-09', 4.70, 'bureau_parc.jpg', 3, 3),
-(70, '2024-02-10', 1.80, 'maison_epicerie.jpg', 4, 4),
-(71, '2024-02-11', 0.90, 'epicerie_cafe.jpg', 4, 4),
-(72, '2024-02-12', 6.50, 'maison_travail.jpg', 5, 5),
-(73, '2024-02-13', 3.30, 'travail_parc.jpg', 5, 5),
-(74, '2024-02-14', 6.40, 'maison_travail.jpg', 5, 5),
-(75, '2024-02-15', 2.20, 'travail_boulangerie.jpg', 5, 5),
-(76, '2024-02-16', 7.10, 'maison_travail.jpg', 1, 3),
-(77, '2024-02-17', 1.50, 'travail_restaurant.jpg', 1, 1),
-(78, '2024-02-18', 5.30, 'maison_bureau.jpg', 2, 2),
-(79, '2024-02-19', 2.50, 'bureau_parc.jpg', 2, 2),
-(80, '2024-02-20', 4.00, 'maison_bureau.jpg', 3, 3),
-(81, '2024-02-21', 4.20, 'bureau_parc.jpg', 3, 3);
+(1, '2024-02-01', 2.5, 'parc_epicerie.jpg', 1, 1),
+(2, '2024-02-02', 3.8, 'bureau_parc.jpg', 2, 2),
+(3, '2024-02-03', 4.2, 'gym_magasin.jpg', 3, 1),
+(4, '2024-02-01', 2.5, 'parc_epicerie.jpg', 1, 1),
+(5, '2024-02-02', 3.8, 'bureau_parc.jpg', 2, 2),
+(6, '2024-02-03', 4.2, 'gym_magasin.jpg', 3, 1),
+(7, '2024-02-01', 2.5, 'parc_epicerie.jpg', 1, 1),
+(8, '2024-02-02', 3.8, 'bureau_parc.jpg', 2, 2),
+(9, '2024-02-03', 4.2, 'gym_magasin.jpg', 3, 1),
+(64, '2024-02-04', 7.3, 'maison_travail.jpg', 1, 3),
+(65, '2024-02-05', 1.2, 'travail_restaurant.jpg', 1, 1),
+(66, '2024-02-06', 5.6, 'maison_bureau.jpg', 2, 2),
+(67, '2024-02-07', 2.1, 'bureau_parc.jpg', 2, 2),
+(68, '2024-02-08', 3.9, 'maison_bureau.jpg', 3, 3),
+(70, '2024-02-10', 1.8, 'maison_epicerie.jpg', 4, 4),
+(71, '2024-02-11', 0.9, 'epicerie_cafe.jpg', 4, 4),
+(72, '2024-02-12', 6.5, 'maison_travail.jpg', 5, 5),
+(73, '2024-02-13', 3.3, 'travail_parc.jpg', 5, 5),
+(74, '2024-02-14', 6.4, 'maison_travail.jpg', 5, 5),
+(75, '2024-02-15', 2.2, 'travail_boulangerie.jpg', 5, 5),
+(76, '2024-02-16', 7.1, 'maison_travail.jpg', 1, 3),
+(77, '2024-02-17', 1.5, 'travail_restaurant.jpg', 1, 1),
+(78, '2024-02-18', 5.3, 'maison_bureau.jpg', 2, 2),
+(79, '2024-02-19', 2.5, 'bureau_parc.jpg', 2, 2),
+(80, '2024-02-20', 4, 'maison_bureau.jpg', 3, 3),
+(81, '2024-02-21', 4.2, 'bureau_parc.jpg', 3, 3),
+(116, '2024-01-28', 6, NULL, 10, 3),
+(121, '2024-01-17', 2, NULL, 54, 3),
+(122, '9999-09-09', 9.22337e18, NULL, 53, 2),
+(123, '2024-01-05', 21, NULL, 52, 1);
 
 -- --------------------------------------------------------
 
@@ -155,11 +148,10 @@ INSERT INTO `ride` (`ride_id`, `ride_date`, `ride_distance`, `ride_photo`, `user
 -- Structure de la table `transport`
 --
 
-CREATE TABLE IF NOT EXISTS `transport` (
-  `transport_id` int NOT NULL AUTO_INCREMENT,
-  `transport_type` varchar(50) NOT NULL,
-  PRIMARY KEY (`transport_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `transport` (
+  `transport_id` int NOT NULL,
+  `transport_type` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `transport`
@@ -178,11 +170,9 @@ INSERT INTO `transport` (`transport_id`, `transport_type`) VALUES
 -- Structure de la table `transport_pris_en_compte`
 --
 
-CREATE TABLE IF NOT EXISTS `transport_pris_en_compte` (
+CREATE TABLE `transport_pris_en_compte` (
   `events_id` int NOT NULL,
-  `transport_id` int NOT NULL,
-  PRIMARY KEY (`events_id`,`transport_id`),
-  KEY `transport_id` (`transport_id`)
+  `transport_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -200,8 +190,8 @@ INSERT INTO `transport_pris_en_compte` (`events_id`, `transport_id`) VALUES
 -- Structure de la table `userprofil`
 --
 
-CREATE TABLE IF NOT EXISTS `userprofil` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `userprofil` (
+  `user_id` int NOT NULL,
   `user_validate` tinyint(1) NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `user_firstname` varchar(50) NOT NULL,
@@ -211,11 +201,8 @@ CREATE TABLE IF NOT EXISTS `userprofil` (
   `user_dateofbirth` date NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_photo` varchar(50) DEFAULT NULL,
-  `enterprise_id` int NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_email` (`user_email`),
-  KEY `enterprise_id` (`enterprise_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `enterprise_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `userprofil`
@@ -228,12 +215,114 @@ INSERT INTO `userprofil` (`user_id`, `user_validate`, `user_name`, `user_firstna
 (4, 1, 'Lefevre', 'David', 'david78', 'Nature lover', 'david@example.com', '1982-07-25', 'PasswordDavid', 'david.jpg', 2),
 (5, 1, 'Bertrand', 'Émilie', 'emilie_94', 'Art and culture enthusiast', 'emilie@example.com', '1995-02-03', 'PasswordEmilie', 'emilie.jpg', 2),
 (6, 1, 'Lambert', 'François', 'francois123', 'Fitness and sports', 'francois@example.com', '1987-11-08', 'PasswordFrancois', 'francois.jpg', 2),
-(7, 1, 'festin', 'bryan', 'banana', NULL, 'banana@gmail.com', '2024-01-19', '$2y$10$fRgExivPbTmfhp6EbrJ74uLPOOBoXc.Y4DmBrsQq/djs4kqN8SHfC', NULL, 1),
-(8, 1, 'Provoke', 'Sora', 'Sora', NULL, 'Sora@mail.fr', '2024-01-01', '$2y$10$oltFxpDRo.Pf14uGgtf.kew.GG8yB1uyGrA52NRt0jPig80ECo5p6', NULL, 1),
-(10, 1, 'Berkani', 'Nassim', 'sora', NULL, 'nassim@mail.fr', '1998-10-10', '$2y$10$tIyEOGMJNv5SXbDC2ErDC.9pihvUvjC2gEknzlqsSv00LVx07kCzS', NULL, 1),
-(20, 1, 'dfsfs', 'zaea', 'sfdsfsq', NULL, 'jsp@mail.fr', '2020-01-10', '$2y$10$RK0klDVOYANIsNnE4xlf2OxjOS5N8j.vct.cqGo3cwDW3SUQ3R1IO', NULL, 1),
-(21, 1, 'dfsfs', 'bryan', 'banana', NULL, 'azavfds@gmail.com', '1998-10-10', '$2y$10$/wSppWDH1qgn4pGHKgzlPudPu5FVRT7GmfF4KHHCosl4beWLQ66sC', NULL, 1),
-(22, 1, 'test', 'test', 'supertest', NULL, 'test@test.fr', '1998-10-10', '$2y$10$vpmBRSm1BZqWiFX6wctcVOG5Z5J4xDLwhXLoEsWTRPZFHvVpYvsoy', NULL, 1);
+(7, 1, 'festin', 'bryan', 'banana', NULL, 'banana@gmail.com', '2024-01-19', '$2y$10$fRgExivPbTmfhp6EbrJ74uLPOOBoXc.Y4DmBrsQq/djs4kqN8SHfC', 'default.png', 1),
+(8, 1, 'Provoke', 'Sora', 'Sora', NULL, 'Sora@mail.fr', '2024-01-01', '$2y$10$oltFxpDRo.Pf14uGgtf.kew.GG8yB1uyGrA52NRt0jPig80ECo5p6', 'default.png', 1),
+(10, 1, 'aminelebg', 'Gojo', 'sora', 'j\'aime tuer des orcs', 'nassim@mail.fr', '2024-01-05', '$2y$10$tIyEOGMJNv5SXbDC2ErDC.9pihvUvjC2gEknzlqsSv00LVx07kCzS', 'Capture d\'écran 2024-01-30 133714.png', 1),
+(20, 1, 'dfsfs', 'zaea', 'sfdsfsq', NULL, 'jsp@mail.fr', '2020-01-10', '$2y$10$RK0klDVOYANIsNnE4xlf2OxjOS5N8j.vct.cqGo3cwDW3SUQ3R1IO', 'default.png', 1),
+(21, 1, 'dfsfs', 'bryan', 'banana', NULL, 'azavfds@gmail.com', '1998-10-10', '$2y$10$/wSppWDH1qgn4pGHKgzlPudPu5FVRT7GmfF4KHHCosl4beWLQ66sC', 'default.png', 1),
+(22, 1, 'dean', 'chems', 'supertest', NULL, 'test@test.fr', '1998-10-10', '$2y$10$vpmBRSm1BZqWiFX6wctcVOG5Z5J4xDLwhXLoEsWTRPZFHvVpYvsoy', 'dean.jpg', 1),
+(47, 1, 'lil', 'uzi', 'vert', NULL, 'lil@uzivert.fr', '1998-10-10', '$2y$10$tYII3D2jujPRd.cjQZT7vuHJIwjgU6RXr4PKAhZNd6FrpJTplGugW', 'default.png', 1),
+(50, 1, 'soso', 'lali', 'lalou', NULL, 'lali@mail.fr', '1998-10-10', '$2y$10$5cLLBtpQe/LrsxRDgCQar.JKm247KMLcIFetkzkZDwkaBOLlDBlq2', 'default.png', 1),
+(51, 1, 'chedy', 'elaifia', 'ch.el', NULL, 'elaifia.chedy@gmail.com', '1990-03-25', '$2y$10$y0wQEFbJfzicC2S3A.lfCOpAcQ6ex7DiydqrwZnqQc1H.IfRIng/C', 'default.png', 1),
+(52, 1, 'Festin', 'Bryan', 'Goeland', 'Il ne sait pas faire la diff entre un goeland et une mouette', 'festinb@gmail.com', '2024-01-27', '$2y$10$68ksMq/GjOgm/BIynYZGu.LWtB.gBlKZslTaLIvOV3z348DeUt05i', 'nanhao.png', 2),
+(53, 1, 'caca', 'prout', 'impot', NULL, 'azerty@gmail.com', '1996-10-10', '$2y$10$JzkVwqwCSooQUrkJzkJyKe0wk8rd0kzS2oeTQVK74docW5fvnbGoe', NULL, 1),
+(54, 1, 'Toto', 'Tata', 'tota', NULL, 'tota@mail.fr', '2024-01-08', '$2y$10$YQyjsX.Lb/dk2o332GdX9OXOahyd6bQMwNii3f.OJDhPxjYw5CZ26', NULL, 1),
+(55, 1, 'azuz', 'aze', 'looser54', NULL, 'ooserkoko@gmail.com', '2024-01-03', '$2y$10$wfVhKH1lI1iMUY/8m5SCUuKYCb9yhMbgybamw3B8Lit./WSbp8pdy', NULL, 2),
+(56, 1, 'Segura', 'Omar', 'zRaW', 'Fan de cinéma et jeux vidéos.', 'Omarsegura76300@gmail.com', '2001-08-24', '$2y$10$RYW9hdsaD2TtA2f9v01eveu/F.DDkP/r9DdtfKF/M4miY..jtp7BS', NULL, 1);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `admin_email` (`admin_email`);
+
+--
+-- Index pour la table `enterprise`
+--
+ALTER TABLE `enterprise`
+  ADD PRIMARY KEY (`enterprise_id`),
+  ADD UNIQUE KEY `enterprise_siret` (`enterprise_siret`);
+
+--
+-- Index pour la table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`events_id`),
+  ADD KEY `enterprise_id` (`enterprise_id`);
+
+--
+-- Index pour la table `ride`
+--
+ALTER TABLE `ride`
+  ADD PRIMARY KEY (`ride_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `transport_id` (`transport_id`);
+
+--
+-- Index pour la table `transport`
+--
+ALTER TABLE `transport`
+  ADD PRIMARY KEY (`transport_id`);
+
+--
+-- Index pour la table `transport_pris_en_compte`
+--
+ALTER TABLE `transport_pris_en_compte`
+  ADD PRIMARY KEY (`events_id`,`transport_id`),
+  ADD KEY `transport_id` (`transport_id`);
+
+--
+-- Index pour la table `userprofil`
+--
+ALTER TABLE `userprofil`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_email` (`user_email`),
+  ADD KEY `enterprise_id` (`enterprise_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `enterprise`
+--
+ALTER TABLE `enterprise`
+  MODIFY `enterprise_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `events`
+--
+ALTER TABLE `events`
+  MODIFY `events_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `ride`
+--
+ALTER TABLE `ride`
+  MODIFY `ride_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
+-- AUTO_INCREMENT pour la table `transport`
+--
+ALTER TABLE `transport`
+  MODIFY `transport_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `userprofil`
+--
+ALTER TABLE `userprofil`
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Contraintes pour les tables déchargées
