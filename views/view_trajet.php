@@ -1,5 +1,5 @@
 <?php
-
+ require_once"../models/transport.php";
 ?>
 
 
@@ -30,13 +30,16 @@
             <label for="ride_photo">vous pouvez affichez une photo:</label>
             <input type="file">
             <label for="transport_id">Moyens de transport:</label>
-            <select name="transport_id" id="transport_id" required>
-                <option value="">--veuillez choisir un champ--</option>
-                <option value="1">Le vélo</option>
-                <option value="2">La trottinette</option>
-                <option value="3">La marche</option>
-                <option value="4">Le roller</option>
-                <option value="5">le skate</option>
+            <select type="text" id="transport" name="transport"
+                value="<?= isset($_POST['transport']) ? htmlspecialchars($_POST['tansport']) : '' ?>">
+                <option value="">--Quelle est votre moyens de transport ?</option>
+                <?php
+                foreach (transport::gettransport() as $transport) { ?>
+                    <option value="<?= $transport["transport_id"] ?>">
+                        <?= $transport["transport_type"] ?>
+                    </option>
+                <?php } ?>
+
             </select>
             
 
