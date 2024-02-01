@@ -192,4 +192,22 @@ class User
             echo $e->getMessage();
         }
     } 
+    public static function deleteuser($user_id)
+{
+    try {
+        self::initDatabase();
+
+        $sql = "DELETE FROM user WHERE user_id = :user_id";
+
+        $query = self::$db->prepare($sql);
+
+        $query->bindValue(':user_id', $user_id, PDO::PARAM_INT); 
+
+        $query->execute();
+    } catch (PDOException $e) {
+        // Lancer une exception ici ou retourner une valeur d'erreur
+        echo  $e->getMessage();
+    }
+}
+
 }

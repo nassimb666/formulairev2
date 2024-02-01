@@ -16,6 +16,7 @@ $description = $_SESSION['user']['user_describ'];
 $mail = $_SESSION['user']['user_email'];
 $birthdate = $_SESSION['user']['date_FR'];
 $photo = $_SESSION['user']['user_photo'];
+$userIdToDelete = $_SESSION['user']['user_id'];
  
 // var_dump($_FILES);
 // var_dump($_POST);
@@ -94,54 +95,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
     }
-   
-   
-   
-   
-   
-   
-   
-   
-    // if (isset($_POST['edit_photo'])) {
-    //     $newphoto = $_POST['new_photo'];
-    //     user::updatePhoto($user_id, $newphoto);
-    //     if (move_uploaded_file($_FILES['new_photo']['tmp_name'], $uploadFile)) {
-    //         //Mettez à jour le chemin de la photo dans la base de données
-    //         user::updatephoto($userId, $uploadFile);
-    //     } else {
-    //         echo "Erreur lors du téléchargement du fichier.";
-    //         } 
-    //     $_SESSION['user']['user_photo'] = $newphoto;
-       
-    // }
-
-    // if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    //     if (isset($_POST['edit_photo'])) {
-    //         // Assurez-vous que le bouton "Modifier" est défini dans la requête POST
-    //         $userId = $_SESSION['user_id']; // Assurez-vous d'avoir la session correctement initialisée
-    
-    //         // Vérifiez si un fichier a été correctement téléchargé
-    //         if(isset($_FILES['new_photo']) && $_FILES['new_photo']['error'] === UPLOAD_ERR_OK) {
-    //             $uploadDir = "../assets/img"; // Remplacez par le répertoire où vous souhaitez stocker les photos
-    //             $uploadFile = $uploadDir . "/" . basename($_FILES['new_photo']['name']);
-    
-    //             // Déplacez le fichier téléchargé vers le répertoire souhaité
-    //             if (move_uploaded_file($_FILES['new_photo']['tmp_name'], $uploadFile)) {
-    //                 // Mettez à jour le chemin de la photo dans la base de données
-    //                 user::updatephoto($userId, $uploadFile);
-    //             } else {
-    //                 echo "Erreur lors du téléchargement du fichier.";
-    //             }
-    //         }
-    //     }
-    // }
-    
     
 
     // Rediriger l'utilisateur après la modification
     header("Location: ../controllers/controler_profile.php");
     exit;
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['delete_user'])) {
+        // Assurez-vous que le bouton "Supprimer le compte" est défini dans la requête POST
+        $userIdToDelete = $_POST['user_id_to_delete'];
+
+        // Appelez la fonction de suppression de l'utilisateur
+        User::deleteuser($userIdToDelete);
+
+        // Rediriger l'utilisateur après la suppression
+        header("Location: controler_signin.php");
+        exit;
+    }
+}
+
 
 include"../views/view_profile.php";
 
