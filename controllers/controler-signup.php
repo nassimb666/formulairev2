@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pseudo = isset($_POST["pseudo"]) ? trim($_POST["pseudo"]) : null;
     $birthdate = isset($_POST["date"]) ? trim($_POST["date"]) : null;
     $password = isset($_POST["password"]) ? trim($_POST["password"]) : null;
-    $enterprise = isset($_POST["entreprise"]) ? trim($_POST["entreprise"]) : null;
+    $enterprise = isset($_POST["enterprise"]) ? trim($_POST["enterprise"]) : null;
     $user_validate = 1;
     $nom = isset($_POST["nom"]) ? trim($_POST["nom"]) : null;
     $prenom = isset($_POST["prenom"]) ? trim($_POST["prenom"]) : null;
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         // Handle successful registration
         try {
-            user::create($user_validate, $nom, $prenom, $pseudo, $birthdate, $courriel, $password, $enterprise);
+            User::create($user_validate, $nom, $prenom, $pseudo, $birthdate, $courriel, $password, $enterprise);
             header("Location: ../views/success.php");
             exit();
         } catch (Exception $e) {

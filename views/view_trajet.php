@@ -1,5 +1,5 @@
 <?php
- require_once"../models/transport.php";
+require_once "../models/transport.php";
 ?>
 
 
@@ -21,7 +21,7 @@
     <?php include '../views/header.php'; ?>
 
     <div class="form_signup">
-        <form method="post" action="" novalidate>
+        <form method="post" action="" novalidate enctype="multipart/form-data">
 
             <label for="ride_date">Date:</label>
             <input type="date" name="ride_date" required>
@@ -30,18 +30,18 @@
             <label for="ride_photo">vous pouvez affichez une photo:</label>
             <input type="file">
             <label for="transport_id">Moyens de transport:</label>
-            <select type="text" id="transport" name="transport"
-                value="<?= isset($_POST['transport']) ? htmlspecialchars($_POST['tansport']) : '' ?>">
-                <option value="">--Quelle est votre moyens de transport ?</option>
+            <label for="transport_id">Moyens de transport:</label>
+            <select type="text" id="transport" name="transport_id">
+                <option value="">--Quelle est votre moyen de transport ?</option>
                 <?php
                 foreach (transport::gettransport() as $transport) { ?>
                     <option value="<?= $transport["transport_id"] ?>">
                         <?= $transport["transport_type"] ?>
                     </option>
                 <?php } ?>
-
             </select>
-            
+
+
 
             <input type="submit" value="Enregistrer le trajet" class="submit-button">
         </form>

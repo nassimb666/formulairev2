@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ride_date = isset($_POST["ride_date"]) ? trim($_POST["ride_date"]) : null;
     $ride_distance = isset($_POST["ride_distance"]) ? intval($_POST["ride_distance"]) : null;
     $transport_id = isset($_POST["transport_id"]) ? intval($_POST["transport_id"]) : null;
-    $ride_photo = isset($_POST["ride_photo"]) ? $_POST["ride_photo"] : null; // Modification, pas besoin de intval
+    $ride_photo = isset($_FILES["ride_photo"]) ? $_FILES["ride_photo"]["name"] : null;
     $user_id = $_SESSION["user"]["user_id"];
 
     var_dump($transport_id);
@@ -28,6 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($transport_id)) {
         $errors["transport_id"] = "Le champ 'Moyens de transport' est obligatoire.";
+    }
+
+    if ($ride_photo !== null) {
+        $destination_directory = "C:/laragon/www/formulaire2/asseets/img"; 
+        $uploaded_file_path = $destination_directory . '/' . $ride_photo;
+        move_uploaded_file($_FILES['ride_photo']['tmp_name'], $uploaded_file_path);
     }
 
     // Si aucune erreur, message de succès
