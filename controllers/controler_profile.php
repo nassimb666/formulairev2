@@ -5,7 +5,6 @@ require_once("../config.php");
 
 require_once("../models/ride.php");
 require_once("../models/utilisateur.php");
-// require_once("../models/profil.php");
 
 
 $user_id = $_SESSION["user"]["user_id"];
@@ -95,10 +94,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
     }
-    if (isset($_POST['delete_user'])) {
-        // Assurez-vous que le bouton "Supprimer le compte" est défini dans la requête POST
-        $userIdToDelete = $_POST['user_id_to_delete'];
 
+    if (isset($_POST['delete_user'])) {
+    $userIdToDelete = isset($_POST['user_id_to_delete']) ? $_POST['user_id_to_delete'] : null;
+    echo "User ID to delete: $userIdToDelete"; // Ajoutez cette ligne
+
+    if ($userIdToDelete) {
         // Appelez la fonction de suppression de l'utilisateur
         User::deleteuser($userIdToDelete);
 
@@ -106,7 +107,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: controler_signin.php");
         exit;
     }
-    
+}
+   
+   
 
     // Rediriger l'utilisateur après la modification
     header("Location: ../controllers/controler_profile.php");

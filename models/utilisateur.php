@@ -75,9 +75,10 @@ class User
         }
     }
 
-    
 
-    public static function updateName($user_id, $newName) {
+
+    public static function updateName($user_id, $newName)
+    {
         try {
             self::initDatabase();
 
@@ -93,7 +94,8 @@ class User
         }
     }
 
-    public static function updateFirstname($user_id, $newFirstname) {
+    public static function updateFirstname($user_id, $newFirstname)
+    {
         try {
             self::initDatabase();
 
@@ -109,7 +111,8 @@ class User
         }
     }
 
-    public static function updatePseudo($user_id, $newPseudo) {
+    public static function updatePseudo($user_id, $newPseudo)
+    {
         try {
             self::initDatabase();
 
@@ -125,7 +128,8 @@ class User
         }
     }
 
-    public static function updateDescription($user_id, $newDescription) {
+    public static function updateDescription($user_id, $newDescription)
+    {
         try {
             self::initDatabase();
 
@@ -141,7 +145,8 @@ class User
         }
     }
 
-    public static function updateMail($user_id, $newMail) {
+    public static function updateMail($user_id, $newMail)
+    {
         try {
             self::initDatabase();
 
@@ -157,10 +162,11 @@ class User
         }
     }
 
-    public static function updateBirthdate($user_id, $newBirthdate) {
+    public static function updateBirthdate($user_id, $newBirthdate)
+    {
         try {
             self::initDatabase();
-            
+
             $sql = "UPDATE userprofil SET user_dateofbirth = :newBirthdate WHERE user_id = :user_id";
             $query = self::$db->prepare($sql);
 
@@ -171,11 +177,12 @@ class User
 
         } catch (PDOException $e) {
             echo $e->getMessage();
-            
+
         }
     }
 
-    public static function updatephoto($user_id, $newphoto){
+    public static function updatephoto($user_id, $newphoto)
+    {
         try {
             self::initDatabase();
 
@@ -191,23 +198,30 @@ class User
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    } 
+    }
     public static function deleteuser($user_id)
 {
     try {
         self::initDatabase();
 
-        $sql = "DELETE FROM user WHERE user_id = :user_id";
+        $sql = "DELETE FROM userprofil WHERE user_id = :user_id";
 
         $query = self::$db->prepare($sql);
 
-        $query->bindValue(':user_id', $user_id, PDO::PARAM_INT); 
+        $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 
         $query->execute();
+
+        // Vérifier les erreurs PDO après l'exécution de la requête
+        if ($query->errorCode() !== '00000') {
+            throw new PDOException(implode(', ', $query->errorInfo()));
+        }
     } catch (PDOException $e) {
         // Lancer une exception ici ou retourner une valeur d'erreur
-        echo  $e->getMessage();
+        echo $e->getMessage();
     }
 }
+
+
 
 }

@@ -121,10 +121,12 @@ require_once "../controllers/controler_profile.php";
         </div>
     </div>
 
-    <form action="../controllers/controler_profile.php" method="post" onsubmit="return confirm('Voulez-vous supprimer le compte? (La suppression sera effectuée même en cliquant sur Annuler)')">
+    <form action="../controllers/controler_profile.php" method="post"
+        onsubmit="return confirm('Voulez-vous supprimer le compte? (La suppression sera effectuée même en cliquant sur Annuler)')">
         <input type="hidden" name="user_id_to_delete" value="<?= $userIdToDelete ?>">
         <button class="delete" name="delete_user">Supprimer le compte</button>
     </form>
+
 
 
 
