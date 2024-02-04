@@ -5,47 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validation</title>
-    <style>
-        /* Ajoutez le style CSS ici */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <link href="../assets/style/style.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Votre inscription est validée !!</h1>
-    <a href="../controllers/controler_signin.php"><button>Se connecter</button></a>
+<body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
+
+    <h1 class="text-3xl font-semibold text-gray-800 mb-4">Votre inscription est validée !!</h1>
+
+    <a href="../controllers/controler_signin.php">
+        <button class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full transition duration-300">
+            Se connecter
+        </button>
+    </a>
+
 </body>
 
 </html>

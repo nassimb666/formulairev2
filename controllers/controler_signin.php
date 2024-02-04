@@ -13,7 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Veuillez remplir tous les champs du formulaire.";
         // exit();
     } else {
-        $user = User::getInfos($email);
+        try{
+           $user = User::getInfos($email);
+        }
+        catch (Exception $e){
+            echo"aucun compte";
+        }
+       
         if ($user) {
             if (password_verify($password, $user['user_password'])) {
                 $_SESSION['user'] = $user;
@@ -25,6 +31,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             echo "Aucun compte trouvé avec cette adresse e-mail.";
         }
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $emailToCheck = $_POST['mail'];
+
+    try {
+        // Utilisez la fonction isEmailExists pour vérifier si l'e-mail existe déjà
+        $emailExists = User::isEmailExists($emailToCheck);
+
+        if ($emailExists) {
+            echo "L'e-mail existe déjà dans la base de données.";
+            // Ajoutez ici le reste du traitement, comme la vérification du mot de passe, etc.
+        } else {
+            // L'e-mail n'existe pas dans la base de données, affichez un message d'erreur ou redirigez vers la page d'inscription.
+            $errors['connexion'] = "L'e-mail n'existe pas dans la base de données.";
+        }
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
     }
 }
 

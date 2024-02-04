@@ -57,7 +57,7 @@ class User
         }
     }
 
-    public static function getInfos(string $email): array
+    public static function getInfos(string $email)
     {
         try {
             self::initDatabase();
