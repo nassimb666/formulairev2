@@ -1,4 +1,4 @@
-<div class="footer bg-gray-800 text-white p-8 text-center">
+<div class="fixed bottom-0 left-0 w-full bg-gray-800 text-white p-8 text-center py-4">
     <p class="text-lg mb-4">Suivez-nous sur les réseaux sociaux :</p>
     <ul class="social-icons flex justify-center space-x-4 text-center">
         <li>

@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        
         // Vérifiez si un fichier a été correctement téléchargé
         if (isset($_FILES['new_photo']) && $_FILES['new_photo']['error'] === 0) {
-            $uploadDir = "../assets/img"; // Remplacez par le répertoire où vous souhaitez stocker les photos
+            $uploadDir = "../assets/img"; 
             $uploadFile = $uploadDir . "/" . basename($_FILES['new_photo']['name']);
     
             // Déplacez le fichier téléchargé vers le répertoire souhaité
@@ -98,14 +98,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['delete_user'])) {
     $userIdToDelete = isset($_POST['user_id_to_delete']) ? $_POST['user_id_to_delete'] : null;
     echo "User ID to delete: $userIdToDelete"; // Ajoutez cette ligne
+    function deconnexionUtilisateur() {
+        // Détruire toutes les données de session
+        session_destroy();
+    
+        // Rediriger vers la page de connexion
+        header("Location: controler_signin.php");
+        exit();
+    }
 
     if ($userIdToDelete) {
         // Appelez la fonction de suppression de l'utilisateur
         User::deleteuser($userIdToDelete);
 
+        deconnexionUtilisateur();
         // Rediriger l'utilisateur après la suppression
-        header("Location: controler_signin.php");
-        exit;
+        
+        
     }
 }
    

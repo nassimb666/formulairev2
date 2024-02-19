@@ -200,31 +200,31 @@ class User
         }
     }
     public static function deleteuser($user_id)
-{
-    try {
-        self::initDatabase();
+    {
+        try {
+            self::initDatabase();
 
-        // Supprimer les trajets associés à l'utilisateur
-        $sqlDeleteRides = "DELETE FROM ride WHERE user_id = :user_id";
-        $queryDeleteRides = self::$db->prepare($sqlDeleteRides);
-        $queryDeleteRides->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-        $queryDeleteRides->execute();
+            // Supprimer les trajets associés à l'utilisateur
+            $sqlDeleteRides = "DELETE FROM ride WHERE user_id = :user_id";
+            $queryDeleteRides = self::$db->prepare($sqlDeleteRides);
+            $queryDeleteRides->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $queryDeleteRides->execute();
 
-        // Supprimer l'utilisateur
-        $sqlDeleteUser = "DELETE FROM userprofil WHERE user_id = :user_id";
-        $queryDeleteUser = self::$db->prepare($sqlDeleteUser);
-        $queryDeleteUser->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-        $queryDeleteUser->execute();
+            // Supprimer l'utilisateur
+            $sqlDeleteUser = "DELETE FROM userprofil WHERE user_id = :user_id";
+            $queryDeleteUser = self::$db->prepare($sqlDeleteUser);
+            $queryDeleteUser->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $queryDeleteUser->execute();
 
-        // Vérifier les erreurs PDO après l'exécution de la requête
-        if ($queryDeleteUser->errorCode() !== '00000') {
-            throw new PDOException(implode(', ', $queryDeleteUser->errorInfo()));
+            // Vérifier les erreurs PDO après l'exécution de la requête
+            if ($queryDeleteUser->errorCode() !== '00000') {
+                throw new PDOException(implode(', ', $queryDeleteUser->errorInfo()));
+            }
+        } catch (PDOException $e) {
+            // Lancer une exception ici ou retourner une valeur d'erreur
+            echo $e->getMessage();
         }
-    } catch (PDOException $e) {
-        // Lancer une exception ici ou retourner une valeur d'erreur
-        echo $e->getMessage();
     }
-}
 
 
 

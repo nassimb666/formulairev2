@@ -32,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Aucun compte trouvé avec cette adresse e-mail.";
         }
     }
+    if ($userIsBlocked) {
+        header("Location: blocked_page.php");
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
